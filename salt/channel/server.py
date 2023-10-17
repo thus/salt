@@ -346,6 +346,12 @@ class ReqServerChannel:
                             "id": load["id"],
                             "pub": load["pub"],
                         }
+                        autosign_grains = load.get("autosign_grains", None)
+                        if (
+                            "full" in self.opts.get("auth_events_autosign_grains", [])
+                            and autosign_grains
+                        ):
+                            eload["autosign_grains"] = autosign_grains
                         self.event.fire_event(
                             eload, salt.utils.event.tagify(prefix="auth")
                         )
@@ -388,6 +394,12 @@ class ReqServerChannel:
                     "id": load["id"],
                     "pub": load["pub"],
                 }
+                autosign_grains = load.get("autosign_grains", None)
+                if (
+                    "reject" in self.opts.get("auth_events_autosign_grains", [])
+                    and autosign_grains
+                ):
+                    eload["autosign_grains"] = autosign_grains
                 self.event.fire_event(eload, salt.utils.event.tagify(prefix="auth"))
             if sign_messages:
                 return self._clear_signed({"ret": False, "nonce": load["nonce"]})
@@ -413,6 +425,12 @@ class ReqServerChannel:
                             "act": "denied",
                             "pub": load["pub"],
                         }
+                        autosign_grains = load.get("autosign_grains", None)
+                        if (
+                            "denied" in self.opts.get("auth_events_autosign_grains", [])
+                            and autosign_grains
+                        ):
+                            eload["autosign_grains"] = autosign_grains
                         self.event.fire_event(
                             eload, salt.utils.event.tagify(prefix="auth")
                         )
@@ -435,6 +453,12 @@ class ReqServerChannel:
                         "id": load["id"],
                         "pub": load["pub"],
                     }
+                    autosign_grains = load.get("autosign_grains", None)
+                    if (
+                        "error" in self.opts.get("auth_events_autosign_grains", [])
+                        and autosign_grains
+                    ):
+                        eload["autosign_grains"] = autosign_grains
                     self.event.fire_event(eload, salt.utils.event.tagify(prefix="auth"))
                 if sign_messages:
                     return self._clear_signed({"ret": False, "nonce": load["nonce"]})
@@ -469,6 +493,12 @@ class ReqServerChannel:
                         "id": load["id"],
                         "pub": load["pub"],
                     }
+                    autosign_grains = load.get("autosign_grains", None)
+                    if (
+                        key_act in self.opts.get("auth_events_autosign_grains", [])
+                        and autosign_grains
+                    ):
+                        eload["autosign_grains"] = autosign_grains
                     self.event.fire_event(eload, salt.utils.event.tagify(prefix="auth"))
                 if sign_messages:
                     return self._clear_signed(
@@ -498,6 +528,12 @@ class ReqServerChannel:
                         "id": load["id"],
                         "pub": load["pub"],
                     }
+                    autosign_grains = load.get("autosign_grains", None)
+                    if (
+                        "reject" in self.opts.get("auth_events_autosign_grains", [])
+                        and autosign_grains
+                    ):
+                        eload["autosign_grains"] = autosign_grains
                     self.event.fire_event(eload, salt.utils.event.tagify(prefix="auth"))
                 if sign_messages:
                     return self._clear_signed({"ret": False, "nonce": load["nonce"]})
@@ -527,6 +563,13 @@ class ReqServerChannel:
                                 "act": "denied",
                                 "pub": load["pub"],
                             }
+                            autosign_grains = load.get("autosign_grains", None)
+                            if (
+                                "denied"
+                                in self.opts.get("auth_events_autosign_grains", [])
+                                and autosign_grains
+                            ):
+                                eload["autosign_grains"] = autosign_grains
                             self.event.fire_event(
                                 eload, salt.utils.event.tagify(prefix="auth")
                             )
@@ -552,6 +595,13 @@ class ReqServerChannel:
                                 "id": load["id"],
                                 "pub": load["pub"],
                             }
+                            autosign_grains = load.get("autosign_grains", None)
+                            if (
+                                "pend"
+                                in self.opts.get("auth_events_autosign_grains", [])
+                                and autosign_grains
+                            ):
+                                eload["autosign_grains"] = autosign_grains
                             self.event.fire_event(
                                 eload, salt.utils.event.tagify(prefix="auth")
                             )
@@ -584,6 +634,13 @@ class ReqServerChannel:
                                 "id": load["id"],
                                 "pub": load["pub"],
                             }
+                            autosign_grains = load.get("autosign_grains", None)
+                            if (
+                                "denied"
+                                in self.opts.get("auth_events_autosign_grains", [])
+                                and autosign_grains
+                            ):
+                                eload["autosign_grains"] = autosign_grains
                             self.event.fire_event(
                                 eload, salt.utils.event.tagify(prefix="auth")
                             )
@@ -606,6 +663,12 @@ class ReqServerChannel:
                     "id": load["id"],
                     "pub": load["pub"],
                 }
+                autosign_grains = load.get("autosign_grains", None)
+                if (
+                    "error" in self.opts.get("auth_events_autosign_grains", [])
+                    and autosign_grains
+                ):
+                    eload["autosign_grains"] = autosign_grains
                 self.event.fire_event(eload, salt.utils.event.tagify(prefix="auth"))
             if sign_messages:
                 return self._clear_signed({"ret": False, "nonce": load["nonce"]})
@@ -739,6 +802,12 @@ class ReqServerChannel:
                 "id": load["id"],
                 "pub": load["pub"],
             }
+            autosign_grains = load.get("autosign_grains", None)
+            if (
+                "accept" in self.opts.get("auth_events_autosign_grains", [])
+                and autosign_grains
+            ):
+                eload["autosign_grains"] = autosign_grains
             self.event.fire_event(eload, salt.utils.event.tagify(prefix="auth"))
         if sign_messages:
             ret["nonce"] = load["nonce"]
